@@ -18,12 +18,12 @@ const observer = new IntersectionObserver(onScroll, options);
 
 gallery.addEventListener('click', imgClick);
 
-input.addEventListener("input", debounce(createMarkup, 500));
+input.addEventListener('input', debounce(createMarkup, 500));
 
 function createMarkup() {
-    const valueInput = input.value;
+    const query = input.value;
 
-    if(valueInput.length === 0) {
+    if(query.length === 0) {
         gallery.innerHTML = "";
         observer.unobserve(document.querySelector('.observer-trigger'));
         return;
@@ -31,7 +31,7 @@ function createMarkup() {
 
     gallery.innerHTML = "";
     page = 1;
-    onFetchHandlers(valueInput, page);
+    onFetchHandlers(query, page);
 
     observer.observe(document.querySelector(".observer-trigger"));
 }
@@ -49,14 +49,14 @@ function imgClick (event) {
 }
 
 function onScroll() {
-    const valueInput = input.value;
+    const query = input.value;
     page += 1;
-    onFetchHandlers(valueInput, page);
+    onFetchHandlers(query, page);
   }
 
-async function onFetchHandlers (valueInput, page) {
+async function onFetchHandlers (query, page) {
     try {
-        const imegesGet = await picsFetch(valueInput, page);
+        const imegesGet = await picsFetch(query, page);
         addGallery(imegesGet);
         // if (imegesGet.hits.length === 0) {
         //     const noticeMy = alert({
@@ -72,7 +72,7 @@ async function onFetchHandlers (valueInput, page) {
     }
 }
 
-async function picsFetch (valueInput, page) {
+async function picsFetch (query, page) {
     
       const root = "https://pixabay.com/api/";
       const mainParams = "image_type=photo&orientation=horizontal";
@@ -80,7 +80,7 @@ async function picsFetch (valueInput, page) {
       const key = "21995991-528c5e3d565cee7c57bbf1d7b";
     
   
-    const url = `${root}?${mainParams}&q=${valueInput}&page=${page}&per_page=${collection}&key=${key}`;
+    const url = `${root}?${mainParams}&q=${query}&page=${page}&per_page=${collection}&key=${key}`;
   
     
     const response = await fetch(url);
