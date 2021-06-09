@@ -43,15 +43,15 @@ function addGallery(result) {
 function imgClick (event) {
     if (event.target.nodeName !== "IMG") {
         return;}
-    const instanceImg = basicLightbox.create(`<img src="${event.target.dataset.large}" alt="${event.target.alt}">`);
+    const instance = basicLightbox.create(`<img src="${event.target.dataset.large}" alt="${event.target.alt}">`);
 
-    instanceImg.show();
+    instance.show();
 }
 
 function onScroll() {
-    const query = input.value;
+    const valueInput = input.value;
     page += 1;
-    onFetchHandlers(query, page, loader);
+    onFetchHandlers(valueInput, page);
   }
 
 async function onFetchHandlers (valueInput, page) {
@@ -73,14 +73,14 @@ async function onFetchHandlers (valueInput, page) {
 }
 
 async function picsFetch (valueInput, page) {
-    const fff ={
-      root: "https://pixabay.com/api/",
-      mainParams: "image_type=photo&orientation=horizontal",
-      collection: 12,
-      key: "21995991-528c5e3d565cee7c57bbf1d7b",
-    }
+    
+      const root = "https://pixabay.com/api/";
+      const mainParams = "image_type=photo&orientation=horizontal";
+      const collection = 12;
+      const key = "21995991-528c5e3d565cee7c57bbf1d7b";
+    
   
-    const url = `${fff.root}?${fff.mainParams}&q=${valueInput}&page=${page}&per_page=${fff.collection}&key=${fff.key}`;
+    const url = `${root}?${mainParams}&q=${valueInput}&page=${page}&per_page=${collection}&key=${key}`;
   
     
     const response = await fetch(url);
