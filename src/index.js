@@ -18,7 +18,7 @@ const observer = new IntersectionObserver(onScroll, options);
 
 gallery.addEventListener('click', imgClick);
 
-input.addEventListener("input", debounce(createMarkup, 500));
+input.addEventListener('input', debounce(createMarkup, 500));
 
 function createMarkup() {
     const query = input.value;
