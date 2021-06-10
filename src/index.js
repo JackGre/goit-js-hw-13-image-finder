@@ -94,6 +94,7 @@ async function picsFetch(query, page) {
     const data = await response.json();
 
     return data;
+
 };
 
 
