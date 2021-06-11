@@ -31,8 +31,9 @@ function createMarkup() {
         return;
     }
 
-    gallery.innerHTML = "";
+   // gallery.innerHTML = "";
     page = 1;
+    
     onFetchHandlers(query, page);
 
     observer.observe(document.querySelector(".observer-trigger"));
@@ -59,7 +60,7 @@ async function onFetchHandlers (query, page) {
     try {
         const imegesGet = await picsFetch(query, page);
         addGallery(imegesGet);
-        if (getImages.hits.length === 0) {
+        if (imegesGet.hits.length === 0) {
             const myNotice = alert({
               text: "No more images to fetch",
               delay: 2000,
